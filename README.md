@@ -11,9 +11,9 @@
       alt="Badge for latest release"
     />
   </a>
-  <a title="Build Status" href="https://github.com/flame-engine/gamepads/actions?query=workflow%3Acicd+branch%3Amain">
+  <a title="Build Status" href="https://github.com/wantroba/gamepads/actions?query=workflow%3Acicd+branch%3Amain">
     <img
-      src="https://github.com/flame-engine/gamepads/workflows/cicd/badge.svg?branch=main"
+      src="https://github.com/wantroba/gamepads/workflows/cicd/badge.svg?branch=main"
       alt="Badge for build status"
     />
   </a>

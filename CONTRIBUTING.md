@@ -229,9 +229,9 @@ There are a few things to think about when doing a release:
 - Create a PR containing the updated changelog and `pubspec.yaml` files.
 
 
-[GitHub issue]: https://github.com/flame-engine/flame/issues
-[GitHub issues]: https://github.com/flame-engine/flame/issues
-[PRs]: https://github.com/flame-engine/flame/pulls
+[GitHub issue]: https://github.com/wantroba/flame/issues
+[GitHub issues]: https://github.com/wantroba/flame/issues
+[PRs]: https://github.com/wantroba/flame/pulls
 [fork guide]: https://docs.github.com/en/get-started/quickstart/contributing-to-projects
 [Discord]: https://discord.com/invite/pxrBmy4
 [Melos]: https://github.com/invertase/melos
