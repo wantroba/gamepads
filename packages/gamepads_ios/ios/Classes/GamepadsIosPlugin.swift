@@ -91,11 +91,14 @@ public class GamepadsIosPlugin: NSObject, FlutterPlugin {
       (gamepad.leftShoulder, "leftShoulder"),
       (gamepad.rightShoulder, "rightShoulder"),
       (gamepad.leftTrigger, "leftTrigger"),
-      (gamepad.rightTrigger, "rightTrigger"),
-      (gamepad.buttonMenu, "buttonMenu"),
-      (gamepad.buttonOptions, "buttonOptions"),
-      (gamepad.buttonHome, "buttonHome"),
+      (gamepad.rightTrigger, "rightTrigger")
     ]
+
+    if #available(iOS 14.0, *) {
+      buttons.append((gamepad.buttonMenu, "buttonMenu"))
+      buttons.append((gamepad.buttonOptions, "buttonOptions"))
+      buttons.append((gamepad.buttonHome, "buttonHome"))
+    }
 
     for (button, name) in buttons {
       button?.valueChangedHandler = { [weak self] _, _, pressed in
