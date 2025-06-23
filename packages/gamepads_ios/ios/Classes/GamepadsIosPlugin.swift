@@ -1,6 +1,6 @@
 import Flutter
-import GameController
 import UIKit
+import GameController
 
 public class GamepadsIosPlugin: NSObject, FlutterPlugin {
   private var channel: FlutterMethodChannel!
@@ -68,20 +68,19 @@ public class GamepadsIosPlugin: NSObject, FlutterPlugin {
     guard let gamepad = controller.extendedGamepad else { return }
     let gamepadId = controllerIds[controller]!
 
-    // CORREÇÃO: dpad agora envia tipo "analog" e mapeia corretamente X e Y
-    gamepad.dpad.valueChangedHandler = { [weak self] element, xValue, yValue in
-      self?.sendAnalogEvent(gamepadId: gamepadId, key: "dpad - xAxis", value: xValue, element: element)
-      self?.sendAnalogEvent(gamepadId: gamepadId, key: "dpad - yAxis", value: yValue, element: element)
+    gamepad.dpad.valueChangedHandler = { [weak self] _, xValue, yValue in
+      self?.sendAnalogEvent(gamepadId: gamepadId, key: "dpad - xAxis", value: xValue)
+      self?.sendAnalogEvent(gamepadId: gamepadId, key: "dpad - yAxis", value: yValue)
     }
 
-    gamepad.leftThumbstick.valueChangedHandler = { [weak self] element, xValue, yValue in
-      self?.sendAnalogEvent(gamepadId: gamepadId, key: "leftStick - xAxis", value: xValue, element: element)
-      self?.sendAnalogEvent(gamepadId: gamepadId, key: "leftStick - yAxis", value: yValue, element: element)
+    gamepad.leftThumbstick.valueChangedHandler = { [weak self] _, xValue, yValue in
+      self?.sendAnalogEvent(gamepadId: gamepadId, key: "leftStick - xAxis", value: xValue)
+      self?.sendAnalogEvent(gamepadId: gamepadId, key: "leftStick - yAxis", value: yValue)
     }
 
-    gamepad.rightThumbstick.valueChangedHandler = { [weak self] element, xValue, yValue in
-      self?.sendAnalogEvent(gamepadId: gamepadId, key: "rightStick - xAxis", value: xValue, element: element)
-      self?.sendAnalogEvent(gamepadId: gamepadId, key: "rightStick - yAxis", value: yValue, element: element)
+    gamepad.rightThumbstick.valueChangedHandler = { [weak self] _, xValue, yValue in
+      self?.sendAnalogEvent(gamepadId: gamepadId, key: "rightStick - xAxis", value: xValue)
+      self?.sendAnalogEvent(gamepadId: gamepadId, key: "rightStick - yAxis", value: yValue)
     }
 
     let buttons: [(GCControllerButtonInput?, String)] = [
@@ -96,29 +95,29 @@ public class GamepadsIosPlugin: NSObject, FlutterPlugin {
     ]
 
     for (button, name) in buttons {
-      button?.valueChangedHandler = { [weak self] element, _, pressed in
-        self?.sendButtonEvent(gamepadId: gamepadId, key: name, value: pressed ? 1.0 : 0.0, element: element)
+      button?.valueChangedHandler = { [weak self] _, _, pressed in
+        self?.sendButtonEvent(gamepadId: gamepadId, key: name, value: pressed ? 1.0 : 0.0)
       }
     }
   }
 
-  private func sendAnalogEvent(gamepadId: Int, key: String, value: Float, element: GCControllerElement) {
+  private func sendAnalogEvent(gamepadId: Int, key: String, value: Float) {
     channel.invokeMethod("event", arguments: [
       "type": "analog",
       "gamepadId": gamepadId,
       "key": key,
       "value": value,
-      "time": Int(element.timestamp)
+      "time": Int(Date().timeIntervalSince1970)
     ])
   }
 
-  private func sendButtonEvent(gamepadId: Int, key: String, value: Float, element: GCControllerElement) {
+  private func sendButtonEvent(gamepadId: Int, key: String, value: Float) {
     channel.invokeMethod("event", arguments: [
       "type": "button",
       "gamepadId": gamepadId,
       "key": key,
       "value": value,
-      "time": Int(element.timestamp)
+      "time": Int(Date().timeIntervalSince1970)
     ])
   }
 }
