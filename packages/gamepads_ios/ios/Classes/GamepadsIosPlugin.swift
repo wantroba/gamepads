@@ -83,7 +83,7 @@ public class GamepadsIosPlugin: NSObject, FlutterPlugin {
       self?.sendEvent(gamepadId: gamepadId, key: "rightStick - yAxis", value: yValue, isAnalog: true)
     }
 
-    let buttons: [(GCControllerButtonInput?, String)] = [
+    var buttons: [(GCControllerButtonInput?, String)] = [
       (gamepad.buttonA, "buttonA"),
       (gamepad.buttonB, "buttonB"),
       (gamepad.buttonX, "buttonX"),
