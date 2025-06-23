@@ -102,7 +102,7 @@ public class GamepadsIosPlugin: NSObject, FlutterPlugin {
   }
 
   private func sendEvent(gamepadId: Int, key: String, value: Float, isAnalog: Bool) {
-    channel.invokeMethod("event", arguments: [
+    channel.invokeMethod("onGamepadEvent", arguments: [
       "type": isAnalog ? "analog" : "button",
       "gamepadId": String(gamepadId),
       "key": key,
