@@ -91,7 +91,10 @@ public class GamepadsIosPlugin: NSObject, FlutterPlugin {
       (gamepad.leftShoulder, "leftShoulder"),
       (gamepad.rightShoulder, "rightShoulder"),
       (gamepad.leftTrigger, "leftTrigger"),
-      (gamepad.rightTrigger, "rightTrigger")
+      (gamepad.rightTrigger, "rightTrigger"),
+      (gamepad.buttonMenu, "buttonMenu"),
+      (gamepad.buttonOptions, "buttonOptions"),
+      (gamepad.buttonHome, "buttonHome"),
     ]
 
     for (button, name) in buttons {
